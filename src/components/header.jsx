@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import CardForm from "./cardForm";
 import BucketForm from "./bucketForm";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({createCard}) => {
   const [cardFormShow, setCardFormShow] = useState(false);
-  const [bucketFormShow, setBucketFormShow] = useState(false);
 
   const onCardFormClose = () => setCardFormShow(false);
   const onCardFormOpen = () => setCardFormShow(true);
 
-  const onBucketFormClose = () => setBucketFormShow(false);
-  const onBucketFormOpen = () => setBucketFormShow(true);
 
   return (
     <div className="page-header">
@@ -20,10 +18,10 @@ const Header = () => {
         <button onClick={onCardFormOpen} className="button">
           Create Card
         </button>
-        <button  onClick={onBucketFormOpen} className="button">Create Bucket</button>
+        <a href="/history"><button>History</button></a>
+        
       </div>
-      <CardForm onClose={onCardFormClose} action="CREATE" show={cardFormShow} />
-      <BucketForm onClose={onBucketFormClose} action="CREATE" show={bucketFormShow}/>
+      <CardForm onClose={onCardFormClose} createCard={createCard} action="CREATE" show={cardFormShow} />
     </div>
   );
 };

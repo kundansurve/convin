@@ -1,10 +1,20 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Modal from "react-modal";
 import { data } from "../data";
 
 Modal.setAppElement("#root");
 
-const BucketForm = ({ show, onClose, bucket, action }) => {
+const BucketForm = ({ show, onClose, bucket, action ,createBucket, editBucket,index }) => {
+    const [bucketInfo,setBucketInfo] = useState(bucket);
+
+    const onSubmit = () =>{
+        editBucket(index,bucketInfo);
+        onClose();
+    }
+    useEffect(()=>{
+        setBucketInfo(bucket);
+    },[bucket,show,action])
+    
   return (
     <Modal
       isOpen={show}
@@ -18,7 +28,6 @@ const BucketForm = ({ show, onClose, bucket, action }) => {
           X
         </button>
       </div>
-      <form action="">
         <label onSubmit={() => {}} for="name">
           Bucket Name
         </label>
@@ -27,6 +36,8 @@ const BucketForm = ({ show, onClose, bucket, action }) => {
           id="name"
           name="name"
           placeholder="Bucket Name..."
+          value={bucketInfo.bucketName}
+          onChange={(e)=>setBucketInfo({...bucketInfo,bucketName:e.target.value})}
         />
 
         <label for="description">Description</label>
@@ -35,17 +46,19 @@ const BucketForm = ({ show, onClose, bucket, action }) => {
           id="description"
           name="description"
           placeholder="Add description..."
+          value={bucketInfo.discription}
+          onChange={(e)=>setBucketInfo({...bucketInfo,discription:e.target.value})}
         />
         
         <div className="submit-button-wrapper">
           <input
             className="button"
-            type="submit"
+            type="button"
+            onClick={onSubmit}
             value={action === "EDIT" ? "Save" : "Create"}
           />
           <input className="cancel-button" type="button" value="Cancel" onClick={onClose}/>
         </div>
-      </form>
     </Modal>
   );
 };

@@ -6,15 +6,46 @@ import { data, buckets } from "../data";
 import { BiEdit } from "react-icons/bi";
 import BucketForm from "./../components/bucketForm";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import Header from "../components/header";
 
 const Home = () => {
   const [cards, setCards] = useState(data);
+  const [Buckets,setBuckets] = useState(buckets);
   const [deleteMultiple, setDeleteMultiple] = useState(null);
-  const [bucketFormShow, setBucketFormShow] = useState(false);
-  const onBucketFormClose = () => setBucketFormShow(false);
-  const onBucketFormOpen = () => setBucketFormShow(true);
+  const [bucketFormShow, setBucketFormShow] = useState(0);
+  const onBucketFormClose = () => setBucketFormShow(0);
+  const onBucketFormOpen = (i) => setBucketFormShow(i+1);
   const [selectedMultipleBucket, setSelectedMultipleBucket] = useState(null);
   const [selectedMultipleCards, setSelectedMultipleCards] = useState([]);
+
+  const createCard = (newCard)=>{
+    const newCards= [...cards];
+    alert(JSON.stringify(newCard))
+    newCards.push(newCard);
+    setCards(newCards);
+  }
+
+  const editCard = (id,newCardInfo)=>{
+    const newCards = cards.filter(obj=>obj.id!=id);
+    newCards.push({id:id,...newCardInfo.cardInfo})
+    setCards(newCards);
+  }
+
+  const deleteCard = (id)=>{
+    const newCards = cards.filter(obj=>obj.id!=id);
+    setCards(newCards);
+  }
+
+  const editBucket = (idx, newBucketInfo)=>{
+    const newBuckets =[...Buckets];
+    newBuckets.splice(idx,1,newBucketInfo)
+    setBuckets(newBuckets);
+  }
+
+  const deleteMultipleCard = (idArray)=>{
+    const newCards = cards.filter(obj=>!idArray.includes(obj.id));
+    setCards(newCards);
+  }
 
   const onDrop = (card, monitor, bucket) => {
     const mapping = buckets.find((si) => si.bucketName === bucket);
@@ -52,7 +83,8 @@ const Home = () => {
   };
 
   return (
-    <div className={"row"} style={{ overflowX: "scroll", minHeight: "88vh" }}>
+    <><Header createCard={createCard}/>
+        <div className={"row"} style={{ overflowX: "scroll", minHeight: "88vh" }}>
       <div
         style={{
           position: "absolute",
@@ -65,7 +97,7 @@ const Home = () => {
           zIndex: "5",
         }}
       ></div>
-      {buckets.map((s) => {
+      {Buckets.map((s,index) => {
         if (!s) {
           return null;
         }
@@ -79,7 +111,7 @@ const Home = () => {
               <BiEdit
                 className="float-right"
                 style={{ float: "right" }}
-                onClick={onBucketFormOpen}
+                onClick={()=>onBucketFormOpen(index)}
               />
               <span
                 className={"col-header"}
@@ -87,14 +119,10 @@ const Home = () => {
               >
                 {s.bucketName.toUpperCase()}
               </span>
-              <BucketForm
-                onClose={onBucketFormClose}
-                action="EDIT"
-                show={bucketFormShow}
-              />
+              
               {selectedMultipleBucket === s.bucketName ? (
                 <>
-                  <button className="cancel-button">
+                  <button className="cancel-button" onClick={()=>deleteMultipleCard(selectedMultipleCards)}>
                     <RiDeleteBin6Line /> Delete
                   </button>
                   <button
@@ -130,6 +158,8 @@ const Home = () => {
                         index={idx}
                         movecard={movecard}
                         bucket={s}
+                        onDelete={deleteCard}
+                        editCard={editCard}
                         selected={
                           selectedMultipleCards.includes(i.id) ? true : false
                         }
@@ -146,7 +176,15 @@ const Home = () => {
           </div>
         );
       })}
-    </div>
+      <BucketForm
+                onClose={onBucketFormClose}
+                bucket={(bucketFormShow)?Buckets[bucketFormShow-1]:0}
+                action="EDIT"
+                index={(bucketFormShow)?bucketFormShow-1:0}
+                editBucket={editBucket}
+                show={bucketFormShow}
+            />
+    </div></>
   );
 };
 

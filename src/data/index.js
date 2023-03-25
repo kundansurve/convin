@@ -1,34 +1,31 @@
 const data = [{
     id: 1,
     icon: "⭕️",
-    bucketName: "Entertainment Videos",
-    name: "Human Interest Form",
-    videoLink:""
+    bucketName: "Dance Videos",
+    name: "Pasoori Dance",
+    videoLink:"https://www.youtube.com/embed/klYsYinvorE"
 }, {
     id: 2,
     icon: "⭕️",
-    bucketName: "Entertainment Videos",
-    name: "Purchase present",
-    content: "Get an anniversary gift",
-    videoLink:""
+    bucketName: "Music Videos",
+    name: "Ra Ra Reddy Music",
+    videoLink:"https://www.youtube.com/embed/by4USgMmICE"
 }, {
     id: 3,
     icon: "⭕️",
-    bucketName: "Entertainment Videos",
-    name: "Invest in investments",
-    content: "Call the bank to talk about investments",
-    videoLink:""
+    bucketName: "Education Videos",
+    name: "Computer Engineering",
+    videoLink:"https://www.youtube.com/embed/Hizdc4XVJ1E"
 }, {
     id: 4,
     icon: "⭕️",
-    bucketName: "Entertainment Videos",
-    name: "Daily reading",
-    content: "Finish reading Intro to UI/UX",
-    videoLink:""
+    bucketName: "Sports Videos",
+    name: "Dhoni ",
+    videoLink:"https://www.youtube.com/embed/RZNYL-uGY2Y"
 }];
 
 const buckets = [{
-    bucketName: "Entertainment Videos",
+    bucketName: "Music Videos",
     icon: "⭕️",
     color: "#EB5A46"
 }, {
@@ -36,11 +33,11 @@ const buckets = [{
     icon: "🔆️",
     color: "#00C2E0"
 }, {
-    bucketName: "Action Videos",
+    bucketName: "Dance Videos",
     icon: "📝",
     color: "#C377E0"
 }, {
-    bucketName: "Comedy",
+    bucketName: "Sports Videos",
     icon: "✅",
     color: "#3981DE"
 }];

@@ -270,3 +270,13 @@ textarea{
   margin-bottom: 0em;
   font-size: medium;
 }
+.modal-fullscreen{
+  background-color: #F4F5F7;
+  border-radius: 2px;
+  margin: auto;
+  height: fit-content;
+  min-width: 300px;
+  outline: none;
+  padding: 20px;
+  border-radius: 10px;
+}

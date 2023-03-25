@@ -6,7 +6,7 @@ import { BiEdit } from "react-icons/bi";
 import CardForm from "./cardForm";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const Card = ({ card, index, movecard, bucket, onClick, selected }) => {
+const Card = ({ card, index, movecard, bucket, onClick, selected, editCard, createCard, onDelete }) => {
   const ref = useRef(null);
 
   const [cardFormShow, setCardFormShow] = useState(false);
@@ -65,6 +65,7 @@ const Card = ({ card, index, movecard, bucket, onClick, selected }) => {
               className="float-right"
               color="rgb(247, 82, 82)"
               style={{ margin: "5px" }}
+              onClick={()=>{onDelete(card.id)}}
             />
             <BiEdit
               className="float-right"
@@ -75,9 +76,10 @@ const Card = ({ card, index, movecard, bucket, onClick, selected }) => {
         ) : null}
         <div onClick={onClick ? onClick : onOpen}>
           <p className={"card-title"}>{card.name}</p>
+          <p className={"card-title"}>Video Link:{card.videoLink.substring(0,15)}...</p>
         </div>
         <Window card={card} onClose={onClose} show={show} />
-        <CardForm onClose={onCardFormClose} action="EDIT" show={cardFormShow} />
+        <CardForm onClose={onCardFormClose} action="EDIT" card={card} editCard={editCard} createCard={createCard} show={cardFormShow} />
       </div>
     </Fragment>
   );
