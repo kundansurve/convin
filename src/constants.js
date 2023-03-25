@@ -1,3 +1,3 @@
-const cardType = "ITEM";
+const cardType = "CARD";
 
 export default cardType;

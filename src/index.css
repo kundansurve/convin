@@ -41,10 +41,13 @@ button, input {
 button {
   outline: none;
   background: transparent;
-  border-radius: 5px;
-  color: var(--primary-color);
   transition: all ease 0.8s;
   cursor: pointer;
+  padding:1em;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  margin: 0.5em;
 }
 
 button.active {
@@ -119,10 +122,11 @@ select {
 }
 
 .col-header {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 20px;
   margin-top: 0;
+  width: 80%;
 }
 
 .col {
@@ -153,11 +157,13 @@ select {
 .modal {
   background-color: #F4F5F7;
   border-radius: 2px;
-  margin: 48px 0 80px;
-  min-height: 450px;
-  width: 800px;
+  margin: auto;
+  height: fit-content;
+  min-width: 300px;
+  width: 40%;
   outline: none;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .overlay {
@@ -194,13 +200,73 @@ select {
   border-radius: 5px;
   border: none;
   color: white;
-  margin: 1em;
+  margin: 0.5em;
 }
 
+button{
+  
+}
 .float-right{
   float: right;
 }
 
 .float-left{
   float:left;
+}
+
+input{
+  padding: 1em;
+  width: 90%;
+  border-radius: 5px;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  font-size: medium;
+}
+
+label{
+  padding-top: 0.5em;
+  margin-bottom: 0em;
+  font-size: large;
+}
+
+select{
+  padding: 1em;
+  height: 3.5em;
+  width: 90%;
+  border-radius: 5px;
+  margin-top: 0em;
+}
+
+form{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+form .button{
+  width: 100px;
+}
+
+.submit-button-wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.cancel-button{
+  padding:1em;
+  background-color: rgb(247, 82, 82);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  margin: 0.5em;
+  width: 100px;
+}
+
+textarea{
+  padding: 1em;
+  width: 90%;
+  border-radius: 5px;
+  margin-top: 0em;
+  margin-bottom: 0em;
+  font-size: medium;
 }

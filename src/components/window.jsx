@@ -18,8 +18,8 @@ const Window = ({ show, onClose, card }) => {
             <div>
                 <h2>Description</h2>
                 <p>{card.content}</p>
-                <h2>Status</h2>
-                <p>{card.icon} {`${card.status.charAt(0).toUpperCase()}${card.status.slice(1)}`}</p>
+                <h2>bucket</h2>
+                <p>{card.icon} {`${card.bucketName.charAt(0).toUpperCase()}${card.bucketName.slice(1)}`}</p>
             </div>
         </Modal>
     );

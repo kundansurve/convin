@@ -2,9 +2,17 @@ import React, { Fragment, useState, useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import cardType from "../constants";
 import Window from "./window";
+import { BiEdit } from "react-icons/bi";
+import CardForm from "./cardForm";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
-const Card = ({ card, index, movecard, status }) => {
+const Card = ({ card, index, movecard, bucket, onClick, selected }) => {
   const ref = useRef(null);
+
+  const [cardFormShow, setCardFormShow] = useState(false);
+
+  const onCardFormClose = () => setCardFormShow(false);
+  const onCardFormOpen = () => setCardFormShow(true);
 
   const [collectedProps, drop] = useDrop({
     accept: cardType,
@@ -25,15 +33,15 @@ const Card = ({ card, index, movecard, status }) => {
     },
   });
   const [{ isDragging }, drag] = useDrag({
-    item:card,
-    type:cardType,
-    index:index,
+    item: card,
+    type: cardType,
+    index: index,
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   });
 
-  const [ show, setShow ] = useState(false);
+  const [show, setShow] = useState(false);
 
   const onOpen = () => setShow(true);
 
@@ -45,18 +53,32 @@ const Card = ({ card, index, movecard, status }) => {
     <Fragment>
       <div
         ref={ref}
-        style={{ opacity: isDragging?0:1 ,backgroundImage:"url(https://www.w3schools.com/html/mov_bbb.mp4#t=0.1)"}}
+        style={{
+          opacity: isDragging ? 0 : 1,
+          background: onClick && !selected ? "rgba(0,0,0,0.7)" : null,
+        }}
         className={"card"}
-        onClick={onOpen}
       >
-        <div className={"color-bar"} style={{backgroundColor:status.color}}></div>
-        <p className={"card-title"}>{card.name}</p>
-        <p className={"card-status"}>{card.icon}</p>
-        {/*<video width="100%" controls="controls" preload="metadata">
-  <source src="https://www.w3schools.com/html/mov_bbb.mp4#t=0.1" type="video/mp4"/>
-  </video>*/}
+        {!onClick ? (
+          <>
+            <RiDeleteBin6Line
+              className="float-right"
+              color="rgb(247, 82, 82)"
+              style={{ margin: "5px" }}
+            />
+            <BiEdit
+              className="float-right"
+              style={{ margin: "5px" }}
+              onClick={onCardFormOpen}
+            />
+          </>
+        ) : null}
+        <div onClick={onClick ? onClick : onOpen}>
+          <p className={"card-title"}>{card.name}</p>
+        </div>
+        <Window card={card} onClose={onClose} show={show} />
+        <CardForm onClose={onCardFormClose} action="EDIT" show={cardFormShow} />
       </div>
-      <Window card={card} onClose={onClose} show={show}/>
     </Fragment>
   );
 };

@@ -1,10 +1,12 @@
-import React from "react";
+import React,{useState} from "react";
 
 const Col = ({isOver, children}) =>{
     const className=isOver?"highlighted-regin":"";
 
-    return <div className={`col ${className}`}>
+    return <div className={`col ${className}`} >
+        
         {children}
+        
     </div>
 }
 
